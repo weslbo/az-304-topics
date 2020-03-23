@@ -12,6 +12,7 @@ Cost estimation tools:
 - [Azure Migrate](https://docs.microsoft.com/en-us/azure/migrate/concepts-assessment-calculation#how-do-i-run-an-assessment)
 - [CosmosDB Sizing Calculator](https://docs.microsoft.com/en-us/azure/cosmos-db/estimate-ru-with-capacity-planner)
 - [Azure Site Recovery Deployment Planner](https://aka.ms/asr-deployment-planner-doc)
+- [Azure Hybrid Benefit Savings Calculator](https://azure.microsoft.com/en-us/pricing/hybrid-benefit/#ahub-calculator)
 
 Consider the following methods of purchasing Azure and ways of modifying your pricing
 
@@ -54,7 +55,7 @@ Cost reporting tools:
   - Azure Cost Management -> break down costs by tag
   - Azure Resource Usage and RateCard API
   - Download CSV
-- Use Azure Cost Management – Cost Analysis [link] (https://docs.microsoft.com/en-us/azure/cost-management-billing/)
+- Use Azure Cost Management – Cost Analysis [link](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
   - Provides built-in charts as well as custom views
   - Download your cost data in CSV format
 - Use Power BI 
@@ -68,12 +69,12 @@ Cost reporting tools:
   - Pre-consumption cost analysis
   - What-if analysis
 - Create and respond to cost alerts
-    - Set budget amounts, time periods and email alerts
-    - There may be a delay (up to 8 hrs) between an alert and your current actual cost
-    - Gather the right stakeholders to discuss the cost
-    - Plan for short and long-term action
-        - Increase budget
-        - Implement Azure Policies to prevent in future
+  - Set budget amounts, time periods and email alerts
+  - There may be a delay (up to 8 hrs) between an alert and your current actual cost
+  - Gather the right stakeholders to discuss the cost
+  - Plan for short and long-term action
+    - Increase budget
+    - Implement Azure Policies to prevent in future
 
 #### Recommend solutions to minimize costs
 
@@ -121,8 +122,8 @@ Cost reporting tools:
   - [VPN Gateway pricing](https://azure.microsoft.com/en-us/pricing/details/vpn-gateway/)
 - Data retention and archival
   - Data no longer needed can be removed, freeing up underlying storage
-  - App Insights (monitoring) default retention = 90 days, up to 730 days [link] (https://docs.microsoft.com/en-us/azure/azure-monitor/app/pricing)
-  - Azure Log Analytics default retention = 90 days, up to 730 days, even on individual data types [link] (https://docs.microsoft.com/en-us/azure/azure-monitor/platform/manage-cost-storage)
+  - App Insights (monitoring) default retention = 90 days, up to 730 days [link](https://docs.microsoft.com/en-us/azure/azure-monitor/app/pricing)
+  - Azure Log Analytics default retention = 90 days, up to 730 days, even on individual data types [link](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/manage-cost-storage)
   - Azure SQL Database long-term backup retention up to 10 years
   - Azure Cosmos DB TTL (Time to Live) on containers (default) and items [link](https://docs.microsoft.com/en-us/azure/cosmos-db/time-to-live)
 - Use the right type of data store and partition or scale it appropriately
@@ -130,73 +131,77 @@ Cost reporting tools:
   - Azure ‘Hot' Block Blob Storage costs around 1/50 of the cost of the equivalent size of a Premium SSD volume
   - Use of CDN and caching services (Redis) can dramatically decrease load on front-end servers
 
-
 ## Design a solution for logging and monitoring
 
 Best practices and recommendations:
+
 - Monitoring information is crucial for:
-    - Automated failover and failback systems depend on the correct functioning of monitoring and instrumentation
-    - Dashboards to visualize system health and operator alerts also depend on having accurate monitoring and instrumentation
-    - If these elements fail, miss critical information, or report inaccurate data, an operator might not realize that the system is unhealthy or failing.
+  - Automated failover and failback systems depend on the correct functioning of monitoring and instrumentation
+  - Dashboards to visualize system health and operator alerts also depend on having accurate monitoring and instrumentation
+  - If these elements fail, miss critical information, or report inaccurate data, an operator might not realize that the system is unhealthy or failing.
 - Failure mode analysis: identify possible failure points in a system during architecture and design phase
-    - Determine what types of failures an application might experience and how the application detects those failures.
-    - Capture the potential effects of each type of failure and determine how the app responds.
-    - Plan for logging and monitoring the failure and identify recovery strategies.
+  - Determine what types of failures an application might experience and how the application detects those failures.
+  - Capture the potential effects of each type of failure and determine how the app responds.
+  - Plan for logging and monitoring the failure and identify recovery strategies.
 - Early warning system
-    - Identify the key performance indicators of your application's health, such as transient exceptions and remote call latency
-    - Set thresholds at levels that identify issues before they become critical and require a recovery response
-    - Send an alert to operations when the threshold value is reached
+  - Identify the key performance indicators of your application's health, such as transient exceptions and remote call latency
+  - Set thresholds at levels that identify issues before they become critical and require a recovery response
+  - Send an alert to operations when the threshold value is reached
 
 #### Determine levels and storage locations for logs
+
 - The raw data for monitoring can come from a variety of sources, including:
-    - __Application logs__, such as those produced by the Azure Application Insights service.
-    - __Operating system performance metrics__ collected by Azure monitoring __agents__.
-    - __Azure resources__, including metrics collected by Azure Monitor.
-    - __Azure Service Health__, which offers a dashboard to help you track active events.
-    - __Azure AD logs__ built into the Azure platform.
+  - __Application logs__, such as those produced by the Azure Application Insights service.
+  - __Operating system performance metrics__ collected by Azure monitoring __agents__.
+  - __Azure resources__, including metrics collected by Azure Monitor.
+  - __Azure Service Health__, which offers a dashboard to help you track active events.
+  - __Azure AD logs__ built into the Azure platform.
 - Best practices for application logs:
-    - Log data in the production environment
-    - Log events at service boundaries (include a correlation ID)
-    - Use semantic (structured) logging (… so that you can use Kusto queries)
-    - Use asynchronous logging (don’t block your code)
-    - Separate application logging from auditing (use auditing for compliance)
+  - Log data in the production environment
+  - Log events at service boundaries (include a correlation ID)
+  - Use semantic (structured) logging (… so that you can use Kusto queries)
+  - Use asynchronous logging (don’t block your code)
+  - Separate application logging from auditing (use auditing for compliance)
 - Telemetry related to your __Azure tenant__ is collected from tenant-wide services such as Azure Active Directory.
-![Azure Tenant](./resources/tenant.png)
+  ![Azure Tenant](./resources/tenant.png)
 - Telemetry related to the health and operation of your __Azure subscription__.
-![Azure Subscription](./resources/azure-subscription.png)
+  ![Azure Subscription](./resources/azure-subscription.png)
 - Metrics and resource logs provide information about the __internal operation of Azure resources__.
-![Azure Resources](./resources/azure-resources.png)
+  ![Azure Resources](./resources/azure-resources.png)
 - __Compute resources__ in Azure, in other clouds, and on-premises have a guest operating system to monitor. With the installation of one or more agents, you can gather telemetry from the guest into Azure Monitor to analyze it with the same monitoring tools as the Azure services themselves.
-![Compute Resources](./resources/compute-resources.png)
-    - Enabling the __Azure Diagnostics extension__ for Azure Virtual machines allows you to collect logs and metrics from the guest operating system of Azure compute resources including Azure Cloud Service (classic) Web and Worker Roles, Virtual Machines, virtual machine scale sets, and Service Fabric.
-    - Install the __Log Analytics agent__ for comprehensive monitoring and management of your Windows or Linux virtual machines. The virtual machine can be running in Azure, another cloud, or on-premises.
+  ![Compute Resources](./resources/compute-resources.png)
+  - Enabling the __Azure Diagnostics extension__ for Azure Virtual machines allows you to collect logs and metrics from the guest operating system of Azure compute resources including Azure Cloud Service (classic) Web and Worker Roles, Virtual Machines, virtual machine scale sets, and Service Fabric.
+  - Install the __Log Analytics agent__ for comprehensive monitoring and management of your Windows or Linux virtual machines. The virtual machine can be running in Azure, another cloud, or on-premises.
 - Detailed application monitoring in Azure Monitor is done with Application Insights which collects data from applications running on a variety of platforms. The application can be running in Azure, another cloud, or on-premises.
-![Applications](./resources/applications.png)
+  ![Applications](./resources/applications.png)
 - Custom sources (write this data to either Metrics or Logs using an Azure Monitor API)
-![Custom sources](./resources/custom.png)
+  ![Custom sources](./resources/custom.png)
 
 #### Plan for integration with monitoring tools including Azure Monitor and Azure Sentinel
+
 Monitoring solutions and Insights collect data to provide additional insights into the operation of a particular service or application. They may address resources in different application tiers and even multiple tiers.
+
 - __Azure Monitor for containers__ provides a customized monitoring experience for Azure Kubernetes Service (AKS)
 - __Azure Monitor for VMs__  provides a customized experience for monitoring virtual machines
 - More information [here](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/solutions-inventory)
 
-
-
 #### Recommend appropriate monitoring tool(s) for a solution
+
 - Visualization and alerts
-    - Use __Azure Dashboards__ to create a consolidated view of monitoring graphs from Application Insights, Log Analytics, Azure Monitor metrics, and Service Health
-    - Use __Azure Monitoring alerts__ to create notifications on Service Health, resource health, Azure Monitor metrics, logs in Log Analytics, and Application Insights.
+  - Use __Azure Dashboards__ to create a consolidated view of monitoring graphs from Application Insights, Log Analytics, Azure Monitor metrics, and Service Health
+  - Use __Azure Monitoring alerts__ to create notifications on Service Health, resource health, Azure Monitor metrics, logs in Log Analytics, and Application Insights.
 - Azure Monitor partner integrations listed [here](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/partners)
 
 #### Choose a mechanism for event routing and escalation
+
 - You can alert on metrics and logs
-    - Metric values
-    - Log search queries
-    - Activity log events
-    - Health of the underlying Azure platform
-    - Tests for website availability
+  - Metric values
+  - Log search queries
+  - Activity log events
+  - Health of the underlying Azure platform
+  - Tests for website availability
 
 #### Recommend a logging solution for compliance requirements
+
 - Azure Policy enables you to understand the compliance state of your environment.
 - Azure Security Center continually compares the configuration of your resources with requirements in industry standards, regulations, and benchmarks. The [regulatory compliance dashboard](https://docs.microsoft.com/en-us/azure/security-center/update-regulatory-compliance-packages) provides insights into your compliance posture based on how you're meeting specific compliance controls and requirements.
