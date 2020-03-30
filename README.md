@@ -51,8 +51,8 @@
 - recommend a solution that includes Azure AD Managed Identities
 - recommend a solution for integrating applications into Azure AD
 
-## Design Data Storage (15-20%)
--------------------------------
+[Design Data Storage (15-20%)](data-storage.md)
+---------------------------------------------------
 
 #### Design a solution for databases
 
@@ -72,8 +72,8 @@
 - recommend a storage access solution
 - recommend storage management tools
 
-## Design Business Continuity (10-15%)
---------------------------------------
+[Design Business Continuity (10-15%)](business-continuity.md)
+-------------------------------------------------------------
 
 #### Design a solution for backup and recovery
 
@@ -100,8 +100,8 @@
 - identify storage types for high availability
 - recommend a solution for geo-redundancy of workloads
 
-## Design Infrastructure (25-30%)
----------------------------------
+[Design Infrastructure (25-30%)](infrastructure.md)
+---------------------------------------------------
 
 #### Design a compute solution
 
