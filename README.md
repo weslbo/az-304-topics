@@ -1,5 +1,9 @@
 # AZ-304 Exam (Beta) objectives
 
+__Important__:
+
+The aim of this guide is to provide the Azure Architect learner for [AZ-304 (beta)](https://docs.microsoft.com/en-us/learn/certifications/exams/az-304) with various links towards official Azure documentation. This is by no means an official guide, nor a guarantee to pass the exam. Although this guide has an extensive list of topics you should master, it is no way an exhaustive list. 
+
 [Design Monitoring (10-15%)](monitoring.md)
 -------------------------------------------
 
