@@ -7,7 +7,7 @@
 - __With single sign-on__, users sign in once with one account to access domain-joined devices, company resources, software as a service (SaaS) applications, and web applications.
 - __Without single sign-on__, users must remember application-specific passwords and sign in to each application.
 
-This flowchart helps you decide which single sign-on method is best for your situation. More information [here](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/what-is-single-sign-on)
+[This flowchart](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/what-is-single-sign-on) helps you decide which single sign-on method is best for your situation.
 
 ![SingleSignOn](./resources/choose-single-sign-on-method-040419.png)
 
@@ -20,7 +20,7 @@ This flowchart helps you decide which single sign-on method is best for your sit
 - Use __header-based__ single sign-on when the application uses headers for authentication. Header-based single sign-on requires PingAccess for Azure AD. Application Proxy uses Azure AD to authenticate the user and then passes traffic through the connector service.
 
 #### How does OpenID Connect work?
-The most basic sign-in flow has the steps shown in the next diagram [link](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#protocol-diagram-sign-in)
+The most basic sign-in flow has the steps shown in the next [diagram](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#protocol-diagram-sign-in)
 
 ![OpenIDSignOn](./resources/convergence-scenarios-webapp.svg)
 
@@ -35,18 +35,19 @@ Azure AD authentication includes the following components:
 - [Self-service password reset](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-sspr-howitworks).
 
   Requires you to:
-    1. configure a number of authentication options (what methods are available to users)
-    2. know about the password reset policies ([here](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-sspr-policy))
-    2. require users to register when they sign in
-    3. configure write-back passwords to on-premise
-    4. report on password management
+1. configure a number of authentication options (what methods are available to users)
+2. know about the password reset policies ([here](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-sspr-policy))
+2. require users to register when they sign in
+3. configure write-back passwords to on-premise
+4. report on password management
 
 - [Azure Multi-Factor Authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks). 
 
   Requires you to:
-  1. assign licenses to users
-  2. turn on MFA for your users
-  3. notify them
+1. assign licenses to users
+2. turn on MFA for your users
+3. notify them
+
 - [Hybrid integration to write password changes back to on-premises environment](https://docs.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-sspr-writeback)
 
   Password writeback is supported in environments that use:
@@ -76,14 +77,14 @@ Azure AD authentication includes the following components:
 Conditional Access policies are enforced after the first-factor authentication has been completed. Conditional Access is not intended as an organization's first line of defense for scenarios like denial-of-service (DoS) attacks, but can use signals from these events to determine access.
 
 - [Conditional Access policies](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-policy-common)
-  - Require MFA for administrators
-  - Require MFA for Azure management
-  - Require MFA for all users
-  - Block legacy authentication
-  - Risk-based Conditional Access (Requires Azure AD Premium P2)
-  - Require trusted location for MFA registration
-  - Block access by location
-  - Require compliant device
+  - [Require MFA for administrators](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-admin-mfa)
+  - [Require MFA for Azure management](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-azure-management)
+  - [Require MFA for all users](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-block-legacy)
+  - [Block legacy authentication](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-block-legacy)
+  - [Risk-based Conditional Access (Requires Azure AD Premium P2)](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-block-legacy)
+  - [Require trusted location for MFA registration](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-registration)
+  - [Block access by location](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-location)
+  - [Require compliant device](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-compliant-device)
 - A Conditional Access policy must include a [user assignment](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-users-groups) as one of the signals in the decision process. Users can be included or excluded from Conditional Access policies.
 - Conditional Access policies allow administrators to assign controls to [specific applications](https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-cloud-apps) or [actions](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-registration-mfa-sspr-combined).
 - Within a Conditional Access policy, an administrator can make use of signals from conditions like risk, device platform, or location to enhance their policy decisions.
@@ -99,14 +100,28 @@ Conditional Access policies are enforced after the first-factor authentication h
 #### Recommend a solution for network access authentication
 
 - [Azure network security overview](https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview)
-- Network access control
-    - Network Security Groups (NSGs do not provide application layer inspection or authenticated access controls)
-    - Just in time VM access
-    - Service Endpoints
-    - User defined routing
-    - Forced tunneling
-    - NVA Network Virtual Appliances
-- Azure Firewall
+
+- [Network security groups​](https://docs.microsoft.com/en-us/azure/virtual-network/security-overview)
+
+  ![Traffic evaluation](./resources/nsg-interaction.png)
+
+- [Application security groups](https://docs.microsoft.com/en-us/azure/virtual-network/application-security-groups)​
+
+  ![appsecuritygroups](./resources/application-security-groups.png)
+
+- [Just in time VM access](https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time)
+
+- [Service Endpoints](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview)
+
+- [User defined routing](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#custom-routes)
+
+- [Forced tunneling​](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-forced-tunneling-rm)
+
+  ![Forced tunneling](./resources/forced-tunnel.png)
+
+- [NVA Network Virtual Appliances](https://azure.microsoft.com/en-us/blog/azure-firewall-and-network-virtual-appliances/)
+
+- [Azure Firewall](https://docs.microsoft.com/en-us/azure/firewall/tutorial-hybrid-portal)
 
 
 #### Recommend a solution for a hybrid identity including Azure AD Connect and Azure AD Connect Health
@@ -171,7 +186,8 @@ Invitation methods:
     - Azure AD Portal (via CSV upload)
 
 Redemption
-- Depending on the inviting organization's needs, an Azure AD B2B collaboration user can be in one of the following account states:
+- Depending on the inviting organization's needs, an Azure AD B2B collaboration user can be in one of the following [account states](https://docs.microsoft.com/en-us/azure/active-directory/b2b/user-properties):
+
 ![redemption-diagram](./resources/redemption-diagram.png)
 
 With Azure AD B2B collaboration, a tenant admin can set the following invitation policies:
@@ -180,28 +196,103 @@ With Azure AD B2B collaboration, a tenant admin can set the following invitation
 - Admins, the Guest Inviter role, and members can invite
 - All users, including guests, can invite
 
+[Azure Active Directory B2B collaboration licensing guidance](https://docs.microsoft.com/en-us/azure/active-directory/b2b/licensing-guidance)
+
+- B2B guest user licensing is automatically calculated and reported based on the 1:5 ratio.
+- For example: MFA
+
+[Azure AD B2B differs from external sharing in SharePoint Online](https://docs.microsoft.com/en-us/azure/active-directory/b2b/o365-external-user)
+
+[Azure AD B2B comparison to B2C](https://docs.microsoft.com/en-us/azure/active-directory/b2b/compare-with-b2c)
+
+
 ## Design authorization
 
 #### Choose an authorization approach
 
-- RBAC
-- Custom Role
+- [RBAC Role based access control](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)
+- [Understand different roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles)
+- [Azure Active Directory Privileged Identity Management (PIM)](https://docs.microsoft.com/en-us/azure/role-based-access-control/pim-azure-resource)
+- [Conditional access](https://docs.microsoft.com/en-us/azure/role-based-access-control/conditional-access-azure-management)
+- [Custom Roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
+
 
 #### Recommend a hierarchical structure that includes management groups, subscriptions and resource groups
 
+[Subscription design patterns](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/subscriptions/#subscription-design-patterns)
+
+- Single subscription
+- Production-and-nonproduction pattern
+- Workload separation pattern
+- Application category pattern
+- Functional pattern
+- Business unit pattern
+- Geographic pattern
+- Mixed pattern
+
+
 #### Recommend an access management solution including RBAC policies, access reviews, role assignments, physical access, Privileged Identity Management (PIM), Azure AD Identity Protection, Just In Time (JIT) access
 
+- RBAC policies
+  - Security principal (user, group, service principal, managed identity)
+  - [Role definition](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions) (actions, not-actions, data actions, …)
+  - Scope (management group, subscription, resource group, resource)
+  - [Role assignment](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-list-portal) (principal + role + scope)
+  - [Create custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-list-portal)
+  - [Elevate access (global admin) to manage all Azure subscriptions and management Groups](https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin)
+  - [List of all operations](https://docs.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
+
+- Access reviews: 
+  - Why?
+    - Users can join groups, invite guests, connect to cloud apps, and work remotely from their work or personal devices
+    - Too many users in privileged roles
+    - Manual membership of security groups instead of dynamic memberships
+    - Groups used for a new purpose
+    - Business critical data access
+    - To maintain a policy's exception list
+    - Ask group owners to confirm they still need guests in their groups
+  - Where to create?
+    ![accessreviews](./resources/accessreviews.png)
+    - [Azure AD access reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/create-access-review)
+    - [Azure AD PIM](https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json)
+
+- Privileged Identity Management (PIM)
+  - Enables advanced management, monitoring, and control to important resources in your organization
+    - Provides Just-in-time (JIT) access to resources in Azure AD and Azure
+    - Assign time-bound access
+    - Require approval to activate roles
+    - Enforce multi-factor authentication for role activation
+    - Conduct access reviews of existing access
+    - Provides audit history of role activation and access
+    
+  - Covers resources in Azure Active Directory, Azure, Office 365, Intune, and 
+SaaS applications federated with Azure
+  
+  - Requires Azure AD Premium P2
+
 - Azure AD Identity Protection
-  - Your organization can use Identity Protection to automate the detection, investigation, and remediation of risks related to users' identities
-  - User risks and Sign-in risks
-  - There are two different ways to detect and handle identity risks: self-remediation or remediated by administrators
-  - Risk policies make it possible for your organization to respond more appropriately to identity risk.
+
+  - Enables automated responses to detected suspicious activity on user accounts
+  - Provides real time sign-in risk assessment built from several factors
+    - Users with leaked credentials [requires password hash sync]
+    - Sign-ins from anonymous IP addresses (Example: Tor, anonymizing VPN services)
+    - Impossible travel to atypical locations
+    - Sign-ins from infected devices
+    - Sign-ins from IP addresses with suspicious activity
+    - Sign-in from unfamiliar location
+  - Dashboard provides reporting on user status and incidents
+  - Requires Azure AD Premium P2
+
+- Just In Time (JIT) access
+  - Azure Security Center standard pricing tier can lock down inbound traffic with [Just in Time access](https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time)
+  - [Configure JIT on a VM](https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time#configure-jit-on-a-vm)
+
 
 ## Design governance
 
 #### Recommend a strategy for tagging
 - Use tags for organizing your resources, doing automation and scenarios such as chargeback accounting. 
-- Tagging decision guide ([link](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/resource-tagging))
+- [Tagging decision guide](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/decision-guides/resource-tagging)
 ![Tagging decision guide](./resources/decision-guide-resource-tagging.png)
 - Tags applied to the resource group or subscription aren't inherited by the resources
 - You can retrieve information about tags through the Azure Resource Usage and RateCard APIs or the usage comma-separated values (CSV) file.
@@ -260,12 +351,27 @@ With Azure AD B2B collaboration, a tenant admin can set the following invitation
   - Service principal and certificate (not recommended because you have to rotate certificate)
   - Service principal and secret (not recommended)
 - Reduce network access to Key Vault
-  - VNET Service EndPoints ([link](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview-vnet-service-endpoints))
-  - Configure Azure Key Vault firewalls and virtual networks ((link)[https://docs.microsoft.com/en-us/azure/key-vault/key-vault-network-security])
+  - [VNET Service EndPoints](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview-vnet-service-endpoints)
+  - [Configure Azure Key Vault firewalls and virtual networks](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-network-security])
 - All API calls will be logged, allowing you to monitor/audit
-- Use Key Vault references for App Service and Azure Functions ([link](https://docs.microsoft.com/en-us/azure/app-service/app-service-key-vault-references))
-- Azure Disk Encryption uses Key Vault ([link](https://docs.microsoft.com/en-us/azure/security/fundamentals/azure-disk-encryption-vms-vmss))
-- Azure Security Baseline for Key Vault ([link](https://docs.microsoft.com/en-us/azure/key-vault/security-baseline))
+- [Use Key Vault references for App Service and Azure Functions](https://docs.microsoft.com/en-us/azure/app-service/app-service-key-vault-references)
+- [Azure Disk Encryption uses Key Vault](https://docs.microsoft.com/en-us/azure/security/fundamentals/azure-disk-encryption-vms-vmss)
+- [Azure Security Baseline for Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/security-baseline)
+
+- [Azure Key Vault availability and redundancy](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-disaster-recovery-guidance)
+
+  The contents of your key vault are replicated within the region and to a secondary region at least 150 miles away but within the same geography. This maintains high durability of your keys and secrets
+
+- Azure Dedicated HSM
+  - [Why use Azure Dedicated HSM?](https://docs.microsoft.com/en-us/azure/dedicated-hsm/overview)
+    - FIPS 140-2 Level-3 compliance
+    - Single-tenant devices
+    - Full administrative control
+    - High performance
+  - [High availability example](https://docs.microsoft.com/en-us/azure/dedicated-hsm/high-availability#high-availability-example)
+  - [Azure Dedicated HSM deployment architecture](https://docs.microsoft.com/en-us/azure/dedicated-hsm/deployment-architecture)
+
+
 
 #### What can be stored in KeyVault
 
@@ -289,13 +395,13 @@ In the rare event that an entire Azure region is unavailable, the requests that 
 
 #### Recommend a solution that includes Azure AD Managed Identities
 
-- The following diagram shows how managed service identities work with Azure virtual machines (VMs):
+- The following [diagram](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-work) shows how managed service identities work with Azure virtual machines (VMs):
 
 ![managedidentityflow](./resources/data-flow-managed-identity.png)
 
-- Difference between system-assigned managed identity and user-assigned managed identity ([link](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview))
+- [Difference between system-assigned managed identity and user-assigned managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview)
 
-- Azure services that support managed identities ([here](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/services-support-managed-identities))
+- [Azure services that support managed identities](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/services-support-managed-identities)
 
     - Virtual Machines and Scale Sets
     - App Service
@@ -308,7 +414,7 @@ In the rare event that an entire Azure region is unavailable, the requests that 
     - Container Registry Tasks
     - Service Fabric
 
-  Check out the article for a list of Azure resources that support Azure AD authentication ([here](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/services-support-managed-identities#azure-services-that-support-azure-ad-authentication))  
+  [Check out the article](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/services-support-managed-identities#azure-services-that-support-azure-ad-authentication) for a list of Azure resources that support Azure AD authentication 
 
   - Aqcuire access token via IMDS Azure Instance Metadata Service. Ex GET 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' HTTP/1.1 Metadata: true
 

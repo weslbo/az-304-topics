@@ -10,8 +10,13 @@ Cost estimation tools:
 - [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
 - [Azure Cost Management](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
 - [Azure Migrate](https://docs.microsoft.com/en-us/azure/migrate/concepts-assessment-calculation#how-do-i-run-an-assessment)
+    - As-is on-premises sizing
+    - Performance-based sizing
 - [CosmosDB Sizing Calculator](https://docs.microsoft.com/en-us/azure/cosmos-db/estimate-ru-with-capacity-planner)
-- [Azure Site Recovery Deployment Planner](https://aka.ms/asr-deployment-planner-doc)
+    - Estimate provisioned throughput and cost 
+- [Azure Site Recovery Deployment Planner](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-vmware-deployment-planner-cost-estimation)
+    - Estimated disaster recovery cost to Azure
+    - Detail cost analysis per VM
 - [Azure Hybrid Benefit Savings Calculator](https://azure.microsoft.com/en-us/pricing/hybrid-benefit/#ahub-calculator)
 
 Consider the following methods of purchasing Azure and ways of modifying your pricing
@@ -44,7 +49,8 @@ Consider the following methods of purchasing Azure and ways of modifying your pr
   - Enhanced usage data to assist with charge back, savings, and utilization reporting​
   - API for purchasing, along with PS and CLI. ​
   - Beyond VMs: Databricks, App service, SQL Datawarehouse and more…
-
+  - The reservation covers the infrastructure costs. You're charged for Windows software and for additional software.
+  
 Cost reporting tools:
 
 - [Tagging](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources)
@@ -55,20 +61,20 @@ Cost reporting tools:
   - Azure Cost Management -> break down costs by tag
   - Azure Resource Usage and RateCard API
   - Download CSV
-- Use Azure Cost Management – Cost Analysis [link](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
+- Use [Azure Cost Management – Cost Analysis](https://docs.microsoft.com/en-us/azure/cost-management-billing/)
   - Provides built-in charts as well as custom views
   - Download your cost data in CSV format
 - Use Power BI 
-  - Create visuals and reports with the Azure Cost Management connector in Power BI Desktop [link](https://docs.microsoft.com/en-us/power-bi/desktop-connect-azure-cost-management)
-  - Connect to Azure Consumption Insights data in Power BI Desktop [link](https://docs.microsoft.com/en-us/power-bi/desktop-connect-azure-consumption-insights)
-- Use Azure Billing API and Azure Consumption API [link](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/usage-rate-card-overview)
+  - Create visuals and reports with the [Azure Cost Management connector](https://docs.microsoft.com/en-us/power-bi/desktop-connect-azure-cost-management) in Power BI Desktop
+  - Connect to [Azure Consumption Insights](https://docs.microsoft.com/en-us/power-bi/desktop-connect-azure-consumption-insights) data in Power BI Desktop
+- Use [Azure Billing API and Azure Consumption API](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/usage-rate-card-overview)
   - Use Azure Billing APIs to pull usage and resource data
   - Get insights on the Azure spend during the month
   - Set up alerts
   - Predict bill
   - Pre-consumption cost analysis
   - What-if analysis
-- Create and respond to cost alerts
+- Create and respond to [cost alerts](https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-alerts-monitor-usage-spending)
   - Set budget amounts, time periods and email alerts
   - There may be a delay (up to 8 hrs) between an alert and your current actual cost
   - Gather the right stakeholders to discuss the cost
@@ -130,6 +136,14 @@ Cost reporting tools:
   - What is cheaper? Storing a file as Azure Blob Storage Blob or as varbinary(MAX) in Azure SQL Database?
   - Azure ‘Hot' Block Blob Storage costs around 1/50 of the cost of the equivalent size of a Premium SSD volume
   - Use of CDN and caching services (Redis) can dramatically decrease load on front-end servers
+- [Azure Region cost differences](https://azure.microsoft.com/en-us/global-infrastructure/services/)
+- [Combine web apps with Azure App Service Plan](https://azure.microsoft.com/en-us/global-infrastructure/services/)
+- [Use auto-scaling](https://azure.microsoft.com/en-us/global-infrastructure/services/)
+- [Use SQL Elastic pools](https://azure.microsoft.com/en-us/pricing/details/sql-database/elastic/)
+- [Look for most used and slowest web requests](https://azure.microsoft.com/en-us/pricing/details/sql-database/elastic/)
+- [Optimize SQL queries](https://azure.microsoft.com/en-us/pricing/details/sql-database/elastic/)
+- [Use CDN](https://docs.microsoft.com/en-us/azure/cdn/cdn-billing)
+
 
 ## Design a solution for logging and monitoring
 
@@ -162,46 +176,63 @@ Best practices and recommendations:
   - Use semantic (structured) logging (… so that you can use Kusto queries)
   - Use asynchronous logging (don’t block your code)
   - Separate application logging from auditing (use auditing for compliance)
-- Telemetry related to your __Azure tenant__ is collected from tenant-wide services such as Azure Active Directory.
+- Telemetry related to your [__Azure tenant__](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources#azure-tenant) is collected from tenant-wide services such as Azure Active Directory.
   ![Azure Tenant](./resources/tenant.png)
-- Telemetry related to the health and operation of your __Azure subscription__.
+- Telemetry related to the health and operation of your [__Azure subscription__](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources#azure-tenant).
   ![Azure Subscription](./resources/azure-subscription.png)
-- Metrics and resource logs provide information about the __internal operation of Azure resources__.
+- Metrics and resource logs provide information about the __internal operation of [Azure resources](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources#azure-tenant)__.
   ![Azure Resources](./resources/azure-resources.png)
-- __Compute resources__ in Azure, in other clouds, and on-premises have a guest operating system to monitor. With the installation of one or more agents, you can gather telemetry from the guest into Azure Monitor to analyze it with the same monitoring tools as the Azure services themselves.
+- [__Compute resources__](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources#azure-tenant) in Azure, in other clouds, and on-premises have a guest operating system to monitor. With the installation of one or more agents, you can gather telemetry from the guest into Azure Monitor to analyze it with the same monitoring tools as the Azure services themselves.
   ![Compute Resources](./resources/compute-resources.png)
   - Enabling the __Azure Diagnostics extension__ for Azure Virtual machines allows you to collect logs and metrics from the guest operating system of Azure compute resources including Azure Cloud Service (classic) Web and Worker Roles, Virtual Machines, virtual machine scale sets, and Service Fabric.
   - Install the __Log Analytics agent__ for comprehensive monitoring and management of your Windows or Linux virtual machines. The virtual machine can be running in Azure, another cloud, or on-premises.
-- Detailed application monitoring in Azure Monitor is done with Application Insights which collects data from applications running on a variety of platforms. The application can be running in Azure, another cloud, or on-premises.
+- Detailed [application monitoring](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources#application-code) in Azure Monitor is done with Application Insights which collects data from applications running on a variety of platforms. The application can be running in Azure, another cloud, or on-premises.
   ![Applications](./resources/applications.png)
-- Custom sources (write this data to either Metrics or Logs using an Azure Monitor API)
+- [Custom sources](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources#application-code) (write this data to either Metrics or Logs using an Azure Monitor API)
   ![Custom sources](./resources/custom.png)
 
 #### Plan for integration with monitoring tools including Azure Monitor and Azure Sentinel
 
 Monitoring solutions and Insights collect data to provide additional insights into the operation of a particular service or application. They may address resources in different application tiers and even multiple tiers.
 
-- __Azure Monitor for containers__ provides a customized monitoring experience for Azure Kubernetes Service (AKS)
-- __Azure Monitor for VMs__  provides a customized experience for monitoring virtual machines
-- More information [here](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/solutions-inventory)
+- [Design and build a management solution](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/solutions-creating)
+- [Connect to System Center](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/om-agents)
+- [Connect Azure to ITSM tools using IT Service Management Connector](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/itsmc-overview)
+- [Connect data sources to Azure Sentinel](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/itsmc-overview)
+- [Send log data to Azure Monitor with the HTTP Data Collector API](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-collector-api)
+- [Azure Monitor for containers](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview)
+    - Azure Kubernetes Service
+    - Self-hosted Kubernetes cluster
+    - Azure Container Instances
+    - Azure Red Hat OpenShift
+
+    ![Azure Monitor for containers](./resources/azmon-containers-architecture-01.png)
+
 
 #### Recommend appropriate monitoring tool(s) for a solution
 
-- Visualization and alerts
-  - Use __Azure Dashboards__ to create a consolidated view of monitoring graphs from Application Insights, Log Analytics, Azure Monitor metrics, and Service Health
-  - Use __Azure Monitoring alerts__ to create notifications on Service Health, resource health, Azure Monitor metrics, logs in Log Analytics, and Application Insights.
-- Azure Monitor partner integrations listed [here](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/partners)
+- [List of monitoring solutions](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/solutions-inventory)
+- [Azure Dashboards](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/solutions-inventory) to create a consolidated view of monitoring graphs from Application Insights, Log Analytics, Azure Monitor metrics, and Service Health
+- [Azure Monitoring alerts](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/alerts-metric) to create notifications on Service Health, resource health, Azure Monitor metrics, logs in Log Analytics, and Application Insights.
+- [Azure Monitor for Networks](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/alerts-metric)
+- [Azure Monitor partner integrations](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/alerts-metric)
 
 #### Choose a mechanism for event routing and escalation
 
-- You can alert on metrics and logs
+You can [alert](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/alerts-unified-log) on metrics and logs
   - Metric values
   - Log search queries
   - Activity log events
   - Health of the underlying Azure platform
   - Tests for website availability
 
+[Azure Monitor diagnostic settings](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings)
+- Archive to Azure Storage
+- Stream to Event Hub
+- Send to Log Analytics
+
+
 #### Recommend a logging solution for compliance requirements
 
-- Azure Policy enables you to understand the compliance state of your environment.
+- Azure Policy enables you to understand the compliance state of your environment. See [link](https://docs.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data)
 - Azure Security Center continually compares the configuration of your resources with requirements in industry standards, regulations, and benchmarks. The [regulatory compliance dashboard](https://docs.microsoft.com/en-us/azure/security-center/update-regulatory-compliance-packages) provides insights into your compliance posture based on how you're meeting specific compliance controls and requirements.

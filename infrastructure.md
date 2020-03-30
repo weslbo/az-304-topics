@@ -273,6 +273,7 @@ Example CI/CD Pipelines that can be used to provision resources
 
 - [Azure Private DNS: Name Resolution scoped to a single virtual network](https://docs.microsoft.com/en-us/azure/dns/private-dns-scenarios#scenario-name-resolution-scoped-to-a-single-virtual-network)
     ![Azure Private DNS: Name Resolution scoped to a single virtual network](./resources/single-vnet-resolution.png)
+    
     Virtual Network named "A" contains two VMs (VNETA-VM1 and VNETA-VM2). Each of these have Private IPs associated. Once you create a Private Zone named contoso.com and link this virtual network as a Registration virtual network, Azure DNS will automatically create two A records in the zone as depicted. Now, DNS queries from VNETA-VM1 to resolve VNETA-VM2.contoso.com will receive a DNS response that contains the Private IP of VNETA-VM2. Furthermore, a Reverse DNS query (PTR) for the Private IP of VNETA-VM1 (10.0.0.1) issued from VNETA-VM2 will receive a DNS response that contains the name of VNETA-VM1, as expected.
 - [Azure Private DNS: Name Resolution across virtual networks](https://docs.microsoft.com/en-us/azure/dns/private-dns-scenarios#scenario-name-resolution-across-virtual-networks)
     ![Azure Private DNS: Name Resolution across virtual networks](./resources/multi-vnet-resolution.png)
