@@ -184,9 +184,18 @@ With Azure AD B2B collaboration, a tenant admin can set the following invitation
 
 #### Choose an authorization approach
 
+- RBAC
+- Custom Role
+
 #### Recommend a hierarchical structure that includes management groups, subscriptions and resource groups
 
 #### Recommend an access management solution including RBAC policies, access reviews, role assignments, physical access, Privileged Identity Management (PIM), Azure AD Identity Protection, Just In Time (JIT) access
+
+- Azure AD Identity Protection
+  - Your organization can use Identity Protection to automate the detection, investigation, and remediation of risks related to users' identities
+  - User risks and Sign-in risks
+  - There are two different ways to detect and handle identity risks: self-remediation or remediated by administrators
+  - Risk policies make it possible for your organization to respond more appropriately to identity risk.
 
 ## Design governance
 
